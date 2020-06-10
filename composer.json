@@ -1,0 +1,19 @@
+{
+    "name": "stephane/intranet-v2",
+    "authors": [{
+        "name": "Zundel Stéphane",
+        "email": "stephane.zundel@viacesi.fr"
+    }],
+
+    "require": {},
+
+    "config": {
+        "optimize-autoloader": true
+    },
+
+    "autoload": {
+        "psr-4": {
+            "App\\": "app"
+        }
+    }
+}
