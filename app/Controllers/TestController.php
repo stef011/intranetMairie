@@ -6,6 +6,7 @@ class TestController {
 
     public function show()
     {
-        echo "Je fonctionne";
+        $toto = '37';
+        return view('toto', compact('toto'));
     }
 }
