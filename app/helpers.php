@@ -3,8 +3,11 @@
 function view($view, $data = null)
 {
     $view = str_replace('.', '/', $view);
-    foreach ($data as $key => $value) {
-        $$key = $value;
+
+    if($data != null){
+        foreach ($data as $key => $value) {
+            $$key = $value;
+        }
     }
     require 'ressources/views/' . $view . '.php';
     $str = ob_get_contents();
