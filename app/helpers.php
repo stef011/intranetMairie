@@ -6,8 +6,14 @@ function view($view, $data = null)
     foreach ($data as $key => $value) {
         $$key = $value;
     }
-    require 'views/' . $view . '.php';
+    require 'ressources/views/' . $view . '.php';
     $str = ob_get_contents();
     ob_end_clean();
     echo $str;
+}
+
+function assets($path)
+{
+    trim($path, '/');
+    return 'ressources/assets/' . $path;
 }
