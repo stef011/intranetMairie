@@ -5,7 +5,9 @@
         "email": "stephane.zundel@viacesi.fr"
     }],
 
-    "require": {},
+    "require": {
+        "vlucas/phpdotenv": "^5.0"
+    },
 
     "config": {
         "optimize-autoloader": true
