@@ -7,10 +7,25 @@ use ReflectionProperty;
 
 abstract class Model implements iModel{
 
+    /** 
+     * The connection for the Model
+     * 
+     * @var PDO
+     */
     protected static $conn;
 
+    /**
+     * The table associated with the model
+     * 
+     * @var string|null
+     */
     protected static $table;
 
+    /**
+     * The name of the index column
+     * 
+     * @var string
+     */
     protected static $index = 'id';
 
     function __construct()
@@ -18,6 +33,12 @@ abstract class Model implements iModel{
         self::connect();
     }
 
+    /**
+     * Finds an entry by its ID.
+     * 
+     * @param int $id
+     * @return Model
+     */
     public static function find($id)
     {
         self::connect();
@@ -29,6 +50,12 @@ abstract class Model implements iModel{
         return $res;
     }
 
+    /**
+     * Filters the results in database.
+     * 
+     * @param array $options
+     * @return array
+     */
     public static function filter($options = [])
     {
         self::connect();
@@ -64,6 +91,11 @@ abstract class Model implements iModel{
         return $result;
     }
 
+    /**
+     * Save the Model into the database
+     * 
+     * @return bool
+     */
     public function save()
     {
         $class = new ReflectionClass($this);
@@ -93,9 +125,32 @@ abstract class Model implements iModel{
         return $result;
     }
 
+    /**
+     * Use raw sql querry
+     * /!\ Be careful, do not enter direct user input.
+     * 
+     * @param string $statement
+     * @return Model
+     */
+    public static function rawSql($statement){
+        self::connect();
+
+        $res = self::$conn->query($statement)->fetchAll();
+
+        foreach ($res as $value) {
+            $response[] = self::morph($value);
+        }
+
+        return $response;
+    }
 
 
-
+    /** 
+     * Transforms the returned table from the database into Models table
+     * 
+     * @param array $object
+     * @return array Model
+     */
     public static function morph(array $object) {
         $class = new ReflectionClass(get_called_class()); // this is static method that's why i use get_called_class
 
@@ -118,7 +173,12 @@ abstract class Model implements iModel{
         return $entity;
     }
 
-    
+
+    /**
+     *  Connects the model to the database
+     * 
+     * @return void
+     */
     public static function connect()
     {
         if(!static::$table){
