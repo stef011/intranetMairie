@@ -70,14 +70,15 @@ abstract class Model implements iModel{
         foreach ($options as $key =>$option) {
             if ($i == 0) {
                 $whereClause .= $key . ' = :' . $key;
+            }else{
+                $whereClause .= ' AND ' . $key . ' = :' . $key;
             }
-            $whereClause .= ' AND ' . $key . ' = :' . $key;
             $i++;
         }
 
         $query = 'SELECT * FROM ' . static::$table . ' WHERE ' . $whereClause;
 
-        var_dump($query);
+        // var_dump($query);
 
         $stmt = self::$conn->prepare($query);
         $stmt->execute($options);
