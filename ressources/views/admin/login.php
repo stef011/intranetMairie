@@ -14,6 +14,26 @@
     <script src="<?php echo assets('js/jquery.min.js') ?> "></script>
     <script src="<?php echo assets('js/bootstrap/bootstrap.min.js') ?> "></script>
 
+    <style>
+    body {
+        background: transparent url('/ressources/assets/images/login/technology-board.png') 0% 15% no-repeat padding-box;
+        background-attachment: fixed;
+        color: white;
+    }
+
+
+    /* Classes */
+
+    .btn {
+        box-shadow: 1px 3px 3px #00000066;
+    }
+
+    .rounder {
+        border-radius: 15px;
+    }
+
+    </style>
+
 </head>
 
 <body>
