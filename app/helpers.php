@@ -27,8 +27,18 @@ function route($name, $params=[])
     return $router->url($name, $params);
 }
 
-function dd($var)
+if (!function_exists('dd')) {
+    function dd()
+    {
+        array_map(function($x) { 
+            dump($x); 
+        }, func_get_args());
+        die;
+    }
+ }
+
+
+function toto()
 {
-    echo '<pre>';
-    die(var_dump($var));
+    return 'toto';
 }

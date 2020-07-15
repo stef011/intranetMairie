@@ -6,21 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>INTRANET INFORMATIQUE | ALPHA</title>
 
-    <link rel="stylesheet" href="<?php echo assets('css/bootstrap/bootstrap.min.css') ?>">
-    <link rel="stylesheet" href="<?php echo assets('css/index.css') ?>">
-    <link rel="stylesheet" href="<?php echo assets('FontAwesome/css/all.css') ?> ">
+    <meta http-equiv="refresh" content="300">
 
-    <script src="<?php echo assets('js/jquery.min.js') ?>"></script>
-    <script src="<?php echo assets('js/bootstrap/bootstrap.min.js') ?>"></script>
-    <script src="<?php echo assets('FontAwesome/js/all.js') ?> "></script>
+    <link rel="stylesheet" href="<?= assets('css/bootstrap/bootstrap.min.css') ?>">
+    <link rel="stylesheet" href="<?= assets('css/index.css') ?>">
+    <link rel="stylesheet" href="<?= assets('FontAwesome/css/all.css') ?> ">
+
+    <script src="<?= assets('js/jquery.min.js') ?>"></script>
+    <script src="<?= assets('js/bootstrap/bootstrap.min.js') ?>"></script>
+    <script src="<?= assets('FontAwesome/js/all.js') ?> "></script>
 </head>
 
 <body>
     <header class="header">
         <h1 class="m-3 ml-4">
             <a href="#start" class="text-decoration-none text-white">
-                <img src="<?php echo assets('images/logo_white.png') ?>" height="32" width="35" class="header-logo"
-                    alt="" />
+                <img src="<?= assets('images/logo_white.png') ?>" height="32" width="35" class="header-logo" alt="" />
                 INTRANET INFORMATIQUE | ALPHA
             </a>
         </h1>
@@ -34,13 +35,13 @@
             <div class="d-flex h-25 flex-wrap">
                 <div class="app-icon">
                     <a href="https://mail.ville-saint-louis.fr/" target="_blank">
-                        <img class="app-image" src="<?php echo assets('images/applis/o-outlook.jpg') ?>" />
+                        <img class="app-image" src="<?= assets('images/applis/o-outlook.jpg') ?>" />
                     </a>
                 </div>
 
                 <div class="app-icon ">
                     <a href="https://exc-mairie/owa/" target="_blank">
-                        <img class="app-image" src="<?php echo assets('images/applis/o-outlook.jpg') ?>" />
+                        <img class="app-image" src="<?= assets('images/applis/o-outlook.jpg') ?>" />
                         <p class="app-text">
                             Si la
                             messagerie au-dessus ne marche pas cliquez ici</p>
@@ -49,94 +50,94 @@
 
                 <div class="app-icon">
                     <a href="http://fichiers.ville-saint-louis.fr/" target="_blank">
-                        <img class="app-image" src="<?php echo assets('images/applis/o-partages.jpg')?>" />
+                        <img class="app-image" src="<?= assets('images/applis/o-partages.jpg')?>" />
                     </a>
                 </div>
 
                 <div class="app-icon">
                     <a href="http://alpha/manif/login.php" target="_blank">
-                        <img class="app-image" src="<?php echo assets('images/applis/o-manif.jpg"')?>" />
+                        <img class="app-image" src="<?= assets('images/applis/o-manif.jpg"')?>" />
                     </a>
                 </div>
 
                 <div class="app-icon">
                     <a href="https://sig.agglo-saint-louis.fr/" target="_blank">
-                        <img class="app-image" src="<?php echo assets('images/applis/o-SIG.jpg')?>" />
+                        <img class="app-image" src="<?= assets('images/applis/o-SIG.jpg')?>" />
                     </a>
                 </div>
 
                 <div class="app-icon">
                     <a href="http://octime/WD210AWP/WD210AWP.EXE/CONNECT/weoctime92?INI=STLOUIS&" target="_blank">
-                        <img class="app-image" src="<?php echo assets('images/applis/o-octime-new.jpg')?>" />
+                        <img class="app-image" src="<?= assets('images/applis/o-octime-new.jpg')?>" />
                     </a>
                 </div>
 
                 <div class="app-icon">
                     <a href="http://alpha/espace_rh/" target="_blank">
-                        <img class="app-image" src="<?php echo assets('images/applis/o-rh.jpg"')?>" />
+                        <img class="app-image" src="<?= assets('images/applis/o-rh.jpg"')?>" />
                     </a>
                 </div>
                 <!-- Changement pour keepeek -->
                 <div class="app-icon">
                     <a href="http://cloud.ville-saint-louis.fr/" target="_blank">
-                        <img class="app-image" src="<?php echo assets('images/applis/o-keepeek.jpg') ?>" />
+                        <img class="app-image" src="<?= assets('images/applis/o-keepeek.jpg') ?>" />
                     </a>
                 </div>
 
                 <div class="app-icon">
                     <a href="http://10.1.0.31:8080/kolok/login.php" target="_blank">
-                        <img class="app-image" src="<?php echo assets('images/applis/o-kolok.jpg')?>" />
+                        <img class="app-image" src="<?= assets('images/applis/o-kolok.jpg')?>" />
                     </a>
                 </div>
 
                 <div class="app-icon">
                     <a href="http://10.1.0.9/" target="_blank">
-                        <img class="app-image " src="<?php echo assets('images/applis/o-ciril.jpg')?>" />
+                        <img class="app-image " src="<?= assets('images/applis/o-ciril.jpg')?>" />
                     </a>
                 </div>
 
                 <div class="app-icon">
                     <a href="http://mainti/MaintiWeb/Account/Login/" target="_blank">
-                        <img class="app-image" src="<?php echo assets('images/applis/o-mainti4.jpg') ?>" />
+                        <img class="app-image" src="<?= assets('images/applis/o-mainti4.jpg') ?>" />
                     </a>
                 </div>
 
 
                 <div class="app-icon">
                     <a href="http://10.1.0.31:15400/poi/Login.jsp" target="_blank">
-                        <img class="app-image" src="<?php echo assets('images/applis/o-postoffice.jpg')?>" />
+                        <img class="app-image" src="<?= assets('images/applis/o-postoffice.jpg')?>" />
                     </a>
                 </div>
 
                 <div class="app-icon">
                     <a href="http://alpha/olympe/Authentification.php" target="_blank">
-                        <img class="app-image" src="<?php echo assets('images/applis/o-olympe.jpg')?>" />
+                        <img class="app-image" src="<?= assets('images/applis/o-olympe.jpg')?>" />
                     </a>
                 </div>
 
                 <div class="app-icon">
                     <a href="https://www.achatpublic.com/snglogin/do/snglogin?urlprim=https%3A%2F%2Fwww.achatpublic.com%3A443%2Fsnglogin%2Fdo%2Fback%2Faccueil&error=3"
                         target="_blank">
-                        <img class="app-image" src="<?php echo assets('images/applis/o-achatpublic.jpg')?>" />
+                        <img class="app-image" src="<?= assets('images/applis/o-achatpublic.jpg')?>" />
                     </a>
                 </div>
 
 
                 <div class="app-icon">
                     <a href="http://alpha/velo/" target="_blank">
-                        <img class="app-image" src="<?php echo assets('images/applis/o-velo.jpg') ?>" />
+                        <img class="app-image" src="<?= assets('images/applis/o-velo.jpg') ?>" />
                     </a>
                 </div>
 
                 <div class="app-icon">
                     <a href="http://alpha/espace_finances" target="_blank">
-                        <img class="app-image" src="<?php echo assets('images/applis/o-finance.jpg') ?>" />
+                        <img class="app-image" src="<?= assets('images/applis/o-finance.jpg') ?>" />
                     </a>
                 </div>
 
                 <div class="app-icon">
                     <a data-toggle="modal" data-target="#ModalLiens">
-                        <img class="app-image" src="<?php echo assets('images/applis/o-autres.jpg') ?>" />
+                        <img class="app-image" src="<?= assets('images/applis/o-autres.jpg') ?>" />
                     </a>
                 </div>
             </div>
@@ -182,12 +183,12 @@
             </a>
             <a href="http://pret.ville-saint-louis.fr/" target="_blank" class="m-1">
                 <div class="rounded w-100 ask-tile reveal-parent" style="width: 20rem; height: 7.7em;">
-                    <i class="fa fa-desktop mt-2 w-50 h-50" aria-hidden="true">
+                    <i class="fa fa-calendar mt-2 w-50 h-50" aria-hidden="true">
                     </i>
-                    <p class="text-left m-1">Prêt de matériel</p>
+                    <p class="text-left m-1">Agenda Prêt de matériel / Interventions</p>
                     <div class="reveal text-justify bg-white text-dark rounded h6 p-1">
                         <span class="text-medium h5">Prêt de matériel</span><br /><br />
-                        Cliquez ici pour faire une demande de prêt de matériel ou d'intervention planifiée.
+                        Cliquez ici déclarer un prêt de matériel ou une intervention planifiée.
                     </div>
                 </div>
             </a>

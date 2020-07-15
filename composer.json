@@ -6,7 +6,9 @@
     }],
 
     "require": {
-        "vlucas/phpdotenv": "^5.0"
+        "vlucas/phpdotenv": "^5.0",
+        "ckeditor/ckeditor": "4.*",
+        "symfony/var-dumper": "^5.1"
     },
 
     "config": {

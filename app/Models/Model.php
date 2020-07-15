@@ -4,6 +4,7 @@ namespace Model;
 use PDO;
 use ReflectionClass;
 use ReflectionProperty;
+use App\Core\Collection;
 
 abstract class Model implements iModel{
 
@@ -28,9 +29,39 @@ abstract class Model implements iModel{
      */
     protected static $index = 'id';
 
+    /**
+     * The Columns where to search on the table
+     * 
+     * @var string
+     */
+    protected static $search_columns;
+
+    /**
+     * Te columns of the table
+     * 
+     * @var string
+     */
+    protected static $columns;
+
+
     function __construct()
     {
         self::connect();
+    }
+
+
+    public static function all()
+    {
+        self::connect();
+        $sql = "SELECT * FROM " . static::$table ;
+        $req = self::$conn->prepare($sql);
+        $req->bindParam(1, $id);
+        $req->execute();
+        foreach ($req->fetchAll() as $value) {
+            $result[] = self::morph($value);
+        }
+
+        return new Collection($result);
     }
 
     /**
@@ -54,7 +85,7 @@ abstract class Model implements iModel{
      * Filters the results in database.
      * 
      * @param array $options
-     * @return array
+     * @return Collection
      */
     public static function filter($options = [])
     {
@@ -89,7 +120,68 @@ abstract class Model implements iModel{
             $result[] = self::morph($value);
         }
 
-        return $result;
+        return new Collection($result);
+    }
+
+    public static function search($search)
+    {
+        self::connect();
+
+        $result= [];
+
+        if ($search == '') {
+            return static::all();
+        }
+        $columns_sql = 'SELECT column_name FROM information_schema.columns WHERE table_name = "' . static::$table . '"';
+
+        $stmt = self::$conn->prepare($columns_sql);
+        $stmt->execute();
+
+        $fetchedCol = $stmt->fetchAll();
+
+        if(static::$search_columns == ''){
+            static::$search_columns = '';
+            foreach($fetchedCol as $value){
+                static::$search_columns .= $value['column_name'] . ', ';
+            }
+            static::$search_columns = trim(static::$search_columns, ", ");
+        }
+
+        if(static::$columns == ''){
+            static::$columns = '';
+            foreach($fetchedCol as $value){
+                static::$columns .= $value['column_name'] . ', ';
+            }
+            static::$columns = trim(static::$search_columns, ", ");
+        }
+
+
+        // static::$search_columns = implode(', ',array_slice(explode(', ', static::$search_columns), 0, 18));
+
+        $search = explode(' ', $search);
+
+        $regex = "(.*(";
+        $i=0;
+        foreach ($search as $value) {
+            $i++;
+            $regex .= $value . "|";
+        }
+        $regex = trim($regex, '|');
+        $regex .= ").*){" . $i . ",}";
+
+        // $sql = 'SELECT '. static::$index . ' as id, CONCAT(' . static::$search_columns . ') as concatenate FROM ' . static::$table . ' WHERE id_u = 20' ;        
+        $sql = 'SELECT '. static::$columns .' FROM ' . static::$table . ' JOIN (SELECT '. static::$index . ' as id, CONCAT(' . static::$search_columns . ') as concatenate FROM ' . static::$table . ') as T ON T.id = ' . static::$table . '.' . static::$index . ' WHERE T.concatenate REGEXP :regex' ;        
+
+        $stmt = self::$conn->prepare($sql);
+        $stmt->execute(['regex' =>$regex]);
+
+        // dd($stmt->fetchAll(), $regex, static::$search_columns );
+
+        foreach ($stmt->fetchAll() as $key => $value) {
+            $result[] = self::morph($value);
+        }
+
+        return new Collection($result);
     }
 
     /**
@@ -131,7 +223,7 @@ abstract class Model implements iModel{
      * /!\ Be careful, do not enter direct user input.
      * 
      * @param string $statement
-     * @return Model
+     * @return Collection
      */
     public static function rawSql($statement){
         self::connect();
@@ -142,7 +234,7 @@ abstract class Model implements iModel{
             $response[] = self::morph($value);
         }
 
-        return $response;
+        return new Collection($response);
     }
 
 
