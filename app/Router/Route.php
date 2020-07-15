@@ -65,6 +65,8 @@ class Route
             $path = str_replace(":$key", $value, $path);
         }
 
-        return $path;
+        $base_uri = trim($_SERVER['DEFAULT_BASE_URI'], '/');
+
+        return $base_uri.'/'.$path;
     }
 }

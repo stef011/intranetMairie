@@ -1,0 +1,124 @@
+/* Base flags */
+
+body {
+    background: transparent url('/ressources/assets/images/blurred-background.jpg') 0% 15% no-repeat padding-box;
+    overflow: hidden;
+    height: 100vh;
+}
+
+
+/* Classes */
+
+.annexeTile {
+    font-size: 1rem;
+    text-align: center;
+    margin: 0.3rem;
+    padding: 1rem;
+    width: 9rem;
+    height: 9rem;
+    color: white !important;
+}
+
+.line {
+    margin: 2rem, 1rem, 2rem, 1rem;
+    margin-top: 1rem;
+    background-color: rgba(0, 0, 0, 0.3);
+    height: 2px;
+    width: auto;
+    border-radius: 2px;
+}
+
+
+/* BackGround classes */
+
+.bg-Adjointe {
+    background-color: rgba(114, 118, 130, 0.85)
+}
+
+.bg-Informatique {
+    background-color: rgba(129, 197, 194, 0.85);
+}
+
+.bg-Conservatoire {
+    background-color: rgba(55, 86, 86, 0.85);
+}
+
+.bg-Maire {
+    background-color: rgba(114, 118, 130, 0.85);
+}
+
+.bg-Enfance {
+    background-color: rgba(97, 187, 99, 0.85);
+}
+
+.bg-DAEC {
+    background-color: rgba(214, 209, 42, 0.85);
+}
+
+.bg-CTM {
+    background-color: rgba(199, 192, 80, 0.85);
+}
+
+.bg-Secretariatgeneral {
+    background-color: rgba(166, 211, 232, 0.85);
+}
+
+.bg-Affairesdemographiques {
+    background-color: rgba(57, 104, 162, 0.85);
+}
+
+.bg-Affairesjuridiques {
+    background-color: rgba(88, 106, 156, 0.85);
+}
+
+.bg-Archives {
+    background-color: rgba(70, 125, 123, 0.85);
+}
+
+.bg-CCAS {
+    background-color: rgba(197, 179, 129, 0.85);
+}
+
+.bg-Communication {
+    background-color: rgba(57, 48, 132, 0.85);
+}
+
+.bg-Culture {
+    background-color: rgba(60, 132, 60, 0.85);
+}
+
+.bg-Enseignement {
+    background-color: rgba(41, 125, 41, 0.85);
+}
+
+.bg-Espacesverts {
+    background-color: rgba(204, 152, 35, 0.85);
+}
+
+.bg-Finances {
+    background-color: rgba(13, 167, 167, 0.85);
+}
+
+.bg-Mediatheque {
+    background-color: rgba(61, 113, 75, 0.85);
+}
+
+.bg-Policemunicipale {
+    background-color: rgba(124, 126, 199, 0.85);
+}
+
+.bg-Relationspubliques {
+    background-color: rgba(65, 69, 183, 0.85);
+}
+
+.bg-Ressourceshumaines {
+    background-color: rgba(52, 162, 162, 0.85);
+}
+
+.bg-Sport {
+    background-color: rgba(206, 33, 33, 0.85);
+}
+
+.bg-Elus {
+    background-color: rgba(114, 118, 130, 0.85);
+}
