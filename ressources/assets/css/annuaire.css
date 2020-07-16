@@ -9,14 +9,31 @@ body {
 
 /* Classes */
 
+.table-wrapper-scroll {
+    display: block;
+}
+
 .annexeTile {
     font-size: 1rem;
     text-align: center;
-    margin: 0.3rem;
+    margin-top: 1rem;
+    margin-left: 2rem;
     padding: 1rem;
     width: 9rem;
     height: 9rem;
     color: white !important;
+    position: relative;
+}
+
+.annexeTile p {
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 .line {
