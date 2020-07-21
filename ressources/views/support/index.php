@@ -14,11 +14,11 @@
     <!-- Javascript -->
     <script src="<?= assets('FontAwesome/js/all.min.js')?>"></script>
     <script src="<?= assets('js/jquery.min.js')?>" type="text/javascript"></script>
+    <script src="<?= assets('js/bootstrap/bootstrap.min.js') ?>"></script>
     <script defer src="<?= assets('js/bootstrap/bootstrap.min.js')?>"></script>
 </head>
 
 <body>
-
     <header>
         <h1 class="m-5"> <img src="<?= assets('Images/logo_white.png') ?>" alt="Logo"
                 style="width: 2.5rem; position: relative; bottom: 0.35rem;">
@@ -100,11 +100,12 @@
 
         <div id='solution' class="col-md mt-4 mr-4 ml-3 rounded pt-2">
             <h3>À essayer d'abord:</h3>
-            <ul>
-                <li>Manger un bout</li>
+            <ul id="list" class="h4">
+                Commencez à écrire un Sujet.
             </ul>
         </div>
     </div>
+
 
     <script type="text/javascript">
     $('#agree').change(function() {
@@ -113,6 +114,36 @@
         } else {
             $('#hidden-container').css('visibility', 'hidden');
         }
+    })
+    </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#subject').keyup(function() {
+            search = new String;
+            search = $(this).val();
+            console.log(search.length)
+            if (search != '' && search.length > 4) {
+                $.ajax({
+                    url: "/api/tutorials",
+                    method: "post",
+                    data: {
+                        search: search
+                    },
+                    dataType: "text",
+                    success: function(data) {
+                        if (data != '') {
+                            $('#list').html(data)
+
+                        } else {
+                            $('#list').html('Aucun résultat trouvé!')
+                        }
+
+                    }
+                })
+            } else {
+                $('#liste').html('Aucun résultat trouvé');
+            }
+        })
     })
     </script>
 </body>

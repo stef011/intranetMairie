@@ -21,4 +21,9 @@ $router->get('/annuaire', 'AnnuaireController@index', 'annuaire');
 $router->get('/support', 'SupportController@index', 'support.index');
 $router->post('/support', 'SupportController@post', 'support.post');
 
+$router->post('/api/tutorials', 'ApiController@tutos', 'api');
+
+$router->get('/tutoriel/:id', 'TutorialController@show', 'tutoriel');
+
+
 $router->run();
