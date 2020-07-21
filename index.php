@@ -18,5 +18,7 @@ $router->get('/admin/logout', 'AdminController@logout', 'admin.logout');
 
 $router->get('/annuaire', 'AnnuaireController@index', 'annuaire');
 
+$router->get('/support', 'SupportController@index', 'support.index');
+$router->post('/support', 'SupportController@post', 'support.post');
 
 $router->run();

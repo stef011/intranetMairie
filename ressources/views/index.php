@@ -204,7 +204,7 @@
                     <i class="fas fa-file-alt"></i>
                     <p class="h6">Documentation IT</p>
                 </a>
-                <a href="" class="helpTile" id="help">
+                <a href="<?= route('support.index') ?>" class="helpTile" id="help">
                     <i class="fa fa-cogs" aria-hidden="true"></i>
                     <p class="h6">Aide & Maintenance</p>
                 </a>
