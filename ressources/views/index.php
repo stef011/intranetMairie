@@ -27,7 +27,7 @@
         </h1>
     </header>
 
-    <?php if ($success =1) { ?>
+    <?php if ($success == 1) { ?>
     <div class="alert alert-success ml-5 mr-5">Votre demande a bien été prise en compte! </div>
     <?php } ?>
     <div class="d-flex flex-wrap mt-5 ml-5 mr-5 mb-0">
