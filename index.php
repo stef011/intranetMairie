@@ -18,10 +18,11 @@ $router->get('/admin/logout', 'AdminController@logout', 'admin.logout');
 
 $router->get('/annuaire', 'AnnuaireController@index', 'annuaire');
 
-$router->get('/support', 'SupportController@index', 'support.index');
-$router->post('/support', 'SupportController@post', 'support.post');
+$router->get('/support', 'SupportController@index', 'support');
+$router->post('/support', 'SupportController@post', 'support');
 
-$router->post('/api/tutorials', 'ApiController@tutos', 'api');
+$router->post('/api/tutorials', 'ApiController@tutos', 'api.tutorials');
+$router->post('/api/sub-cats', 'ApiController@subCategories', 'api.subCats');
 
 $router->get('/tutoriel/:id', 'TutorialController@show', 'tutoriel');
 

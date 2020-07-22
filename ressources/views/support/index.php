@@ -36,16 +36,20 @@
     <div class="container-fluid mb-4 ml-md-4 ml-2 row">
         <form action="<?= route('support') ?>" method="post" class="col-md-7">
 
+            <?php if ($error != '' && $error != []) { ?>
+            <div class="alert alert-danger"> <?= $error ?></div>
+            <?php } ?>
             <h3 class="form-row mb-2">Vos Coordonnées: </h3>
             <div class="form-row">
                 <div class="form-group col-md-4">
-                    <input type="text" name="nom" placeholder="Nom" value="<?= '' ?>" class="form-control">
+                    <input type="text" name="nom" placeholder="Nom" value="<?= '' ?>" class="form-control" required>
                 </div>
                 <div class="form-group col-md-4">
-                    <input type="text" name="prenom" placeholder="Prénom" value="<?= '' ?>" class="form-control">
+                    <input type="text" name="prenom" placeholder="Prénom" value="<?= '' ?>" class="form-control"
+                        required>
                 </div>
                 <div class="form-group col-md-4">
-                    <select name="Service" class="form-control">
+                    <select name="service" class="form-control" required>
                         <option value="null" disabled selected hidden>Selectionnez votre Service</option>
                         <?php foreach ($services as $service) {?>
                         <option value="<?= $service->id_service ?>"> <?= $service->nom_service ?></option>
@@ -58,8 +62,8 @@
 
             <div class="form-row">
                 <div class="col-md-6">
-                    <select name="Categorie" id="cat" class="form-control" onselect="selected()" required>
-                        <option value="null" disabled selected hidden>Selectionnez une catégorie</option>
+                    <select name="category" id="cat" class="form-control" onselect="selected()" required>
+                        <option value="null" disabled selected hidden>Sélectionnez une catégorie</option>
                         <?php foreach ($categories as $cat) { ?>
                         <option value="<?= $cat->id ?>"><?= $cat->nom ?></option>
                         <?php } ?>
@@ -69,9 +73,9 @@
                     </div>
                 </div>
                 <div class="col-md-6 mt-md-0 mt-1">
-                    <select name="subCategorie" id="sub-cat" class="form-control" required>
-                        <option value="null" disabled selected hidden>Selectionnez une sous-catégorie</option>
-                        <!-- TODO : Ajouter le foreach php et créer la table  -->
+                    <select name="sub-category" id="sub-cat" class="form-control" required>
+                        <option value="null" disabled selected hidden>Choisissez d'abord une catégorie</option>
+                        <!-- TODO : Ajouter le foreach php et créer la table AJAX :(  -->
                     </select>
                     <div class="invalid-feedback">
                         Veuillez choisir une Sous-catégorie.
@@ -147,11 +151,40 @@
                     }
                 })
             } else {
-                $('#liste').html('Aucun résultat trouvé');
+                $('#liste').html('Aucun résultat trouvé!');
             }
         })
     })
     </script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#cat').change(function() {
+            catId = $(this).children('option:selected').val();
+            $.ajax({
+                url: "api/sub-cats",
+                method: "post",
+                data: {
+                    cat: catId,
+                },
+                dataType: 'text',
+                success: function(data) {
+                    if (data != '') {
+                        base =
+                            '<option value="null" disabled selected hidden>Sélectionnez une sous-catégorie</option>';
+                        // $('#sub-cat').prop('required', false)
+                        $('#sub-cat').html(base + data);
+                        $('#sub-cat').remove('is-invalid');
+                        // $('#sub-cat').prop('required', true)
+                    } else {
+                        $('#sub-cat').html('Erreur, aucune sous-catégorie trouvée...');
+                    }
+                }
+            })
+        })
+    })
+    </script>
+
 </body>
 
 </html>

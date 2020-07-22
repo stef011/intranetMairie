@@ -5,6 +5,7 @@ use PDO;
 use ReflectionClass;
 use ReflectionProperty;
 use App\Core\Collection;
+use ReflectionObject;
 
 abstract class Model implements iModel{
 
@@ -49,7 +50,10 @@ abstract class Model implements iModel{
         self::connect();
     }
 
-
+    /**
+     * Return all the table
+     * @return Collection
+     */
     public static function all()
     {
         self::connect();
@@ -192,11 +196,11 @@ abstract class Model implements iModel{
      */
     public function save()
     {
-        $class = new ReflectionClass($this);
+        $object = new ReflectionObject($this);
         $tableName = static::$table;
 
         $propsToImplode = array();
-        foreach ($class->getProperties(ReflectionProperty::IS_PUBLIC) as $property) {
+        foreach ($object->getProperties(ReflectionProperty::IS_PUBLIC) as $property) {
             $propertyName = $property->getName();
             $propsToImplode[] = '`'.$propertyName.'` = "'.$this->{$propertyName}.'"';
         }
@@ -204,15 +208,18 @@ abstract class Model implements iModel{
         $setClause = implode(',',$propsToImplode); // glue all key value pairs together
         $sqlQuery = '';
 
-        if ($this->id > 0) {
+        $index = static::$index;
+
+        if ($this->$index ?? 0 > 0) {
             $sqlQuery = 'UPDATE `'.$tableName.'` SET '.$setClause.' WHERE id = '.$this->id;
         } else {
-            $sqlQuery = 'INSERT INTO `'.$tableName.'` SET '.$setClause.', id = '.$this->id;
+            $sqlQuery = 'INSERT INTO `'.$tableName.'` SET '.$setClause;
         }
 
         $result = self::$conn->exec($sqlQuery);
 
-        if (self::$conn->errorCode()) {
+
+        if (self::$conn->errorCode() != 00000) {
             throw new \Exception(self::$conn->errorInfo()[2]);
         }
 

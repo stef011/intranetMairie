@@ -25,9 +25,11 @@
                 INTRANET INFORMATIQUE | ALPHA
             </a>
         </h1>
-
     </header>
 
+    <?php if ($success =1) { ?>
+    <div class="alert alert-success ml-5 mr-5">Votre demande a bien été prise en compte! </div>
+    <?php } ?>
     <div class="d-flex flex-wrap mt-5 ml-5 mr-5 mb-0">
         <div class=" mr-2" style=" max-width: 32rem;" id="applis">
             <h3 class="block-title ml-3">Applications métiers</h3>

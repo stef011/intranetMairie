@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use Model\SubCategory;
 use Model\Tutorial;
 
 class ApiController{
@@ -17,6 +18,17 @@ class ApiController{
 
         echo $response;
 
+    }
+
+    public function subCategories()
+    {
+        $sousCats = SubCategory::filter(['category_id' => ($_POST['cat'] ?? '')]);
+        $response = '';
+
+        foreach ($sousCats as $sousCat) {
+            $response .= '<option value="'. $sousCat->id .'">'. $sousCat->nom .'</option>' . "\n";
+        }
+        echo $response;
     }
 }
 
