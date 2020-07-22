@@ -53,6 +53,7 @@ abstract class Model implements iModel{
     public static function all()
     {
         self::connect();
+        $result = [];
         $sql = "SELECT * FROM " . static::$table ;
         $req = self::$conn->prepare($sql);
         $req->bindParam(1, $id);
