@@ -168,8 +168,7 @@
                     </div>
                 </div>
             </a>
-            <a href="mailto:informatique@ville-saint-louis.fr?subject=Demande%20de%20d%C3%A9pannage&body=Description%20d%C3%A9taill%C3%A9e%20de%20votre%20demande%0D%0A%0D%0A%0D%0A%0D%0A----------------------------------------------------------------------------------------------------------%0ALieu%20:%20Mairie%0D%0ABureau%20:%20...%0D%0AUrgent%20:%20Non%0D%0ADate(s)%20d%E2%80%99intervention%20:%20(facultative)%0D%0A----------------------------------------------------------------------------------------------------------"
-                class="m-1">
+            <a href="<?= route('support') ?>">
                 <div class="rounded w-100 ask-tile reveal-parent" style="width: 15rem; height: 7.7rem;">
                     <i class="fa fa-cogs mt-2 w-50 h-50" aria-hidden="true">
                     </i>
@@ -203,10 +202,6 @@
                 <a href="http://alpha/docs/IT/" target="_blank" class="helpTile" id="docs">
                     <i class="fas fa-file-alt"></i>
                     <p class="h6">Documentation IT</p>
-                </a>
-                <a href="<?= route('support.index') ?>" class="helpTile" id="help">
-                    <i class="fa fa-cogs" aria-hidden="true"></i>
-                    <p class="h6">Aide & Maintenance</p>
                 </a>
                 <a href="softwarecenter:" target="_blank" class="helpTile" id="appCenter">
                     <i class="fa fa-download" aria-hidden="true"></i>

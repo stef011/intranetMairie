@@ -19,16 +19,22 @@
 </head>
 
 <body>
-    <header>
-        <h1 class="m-5"> <img src="<?= assets('Images/logo_white.png') ?>" alt="Logo"
+    <header class="d-flex justify-content-between align-items-stretch">
+        <h1 class="mb-5 mt-2 ml-5 align-self-start"> <img src="<?= assets('Images/logo_white.png') ?>" alt="Logo"
                 style="width: 2.5rem; position: relative; bottom: 0.35rem;">
             Demande de Support |
             Site
             Alpha </h1>
+
+        <div class="float-right mr-5">
+            <h2 class="h4">Vos informations</h2>
+            <span class="font-weight-bold">Nom pc :</span> <?= gethostbyaddr($_SERVER['REMOTE_ADDR']) ?> <br>
+            <span class="font-weight-bold">Adresse IP :</span> <?= $_SERVER["REMOTE_ADDR"] ?>
+        </div>
     </header>
 
     <div class="container-fluid mb-4 ml-md-4 ml-2 row">
-        <form action="<?= route('support.post') ?>" method="post" class="col-md-7">
+        <form action="<?= route('support') ?>" method="post" class="col-md-7">
 
             <h3 class="form-row mb-2">Vos Coordonnées: </h3>
             <div class="form-row">
