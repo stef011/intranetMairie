@@ -8,7 +8,7 @@ use Model\Tutorial;
 class ApiController{
     public function tutos()
     {
-        $tutoriels = Tutorial::search(($_POST['search'] ?? ''));
+        $tutoriels = Tutorial::search(($_POST['search'] ?? ''))->filter(['ID_ETAT_TUTORIEL' => 1]);
         $response = '';
         
         foreach ($tutoriels as $tutoriel) {
