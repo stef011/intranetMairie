@@ -7,7 +7,7 @@ use ReflectionProperty;
 use App\Core\Collection;
 use ReflectionObject;
 
-abstract class Model implements iModel{
+abstract class Model {
 
     /** 
      * The connection for the Model
@@ -77,10 +77,15 @@ abstract class Model implements iModel{
      */
     public static function find($id)
     {
+        if (!is_array($id)) {
+            $id = array($id);
+        }
+        $ids = implode(",",$id);
+
         self::connect();
-        $sql = "SELECT * FROM " . static::$table . " WHERE " . static::$index . " = ?";
+        $sql = "SELECT * FROM " . static::$table . " WHERE " . static::$index . " IN (?)";
         $req = self::$conn->prepare($sql);
-        $req->bindParam(1, $id);
+        $req->bindParam(1, $ids);
         $req->execute();
         $res = self::morph($req->fetch());
         return $res;
