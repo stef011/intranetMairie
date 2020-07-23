@@ -10,7 +10,8 @@ class IndexController{
 
     public function show()
     {
+        $success = $_GET['success'] ?? '';
         $infos = Information::show();
-        return view('index', compact('infos'));
+        return view('index', compact('infos', 'success'));
     }
 }

@@ -20,14 +20,16 @@
 <body>
     <header class="header">
         <h1 class="m-3 ml-4">
-            <a href="#start" class="text-decoration-none text-white">
+            <a href="<?= route('index') ?>" class="text-decoration-none text-white">
                 <img src="<?= assets('images/logo_white.png') ?>" height="32" width="35" class="header-logo" alt="" />
                 INTRANET INFORMATIQUE | ALPHA
             </a>
         </h1>
-
     </header>
 
+    <?php if ($success == 1) { ?>
+    <div class="alert alert-success ml-5 mr-5">Votre demande a bien été prise en compte! </div>
+    <?php } ?>
     <div class="d-flex flex-wrap mt-5 ml-5 mr-5 mb-0">
         <div class=" mr-2" style=" max-width: 32rem;" id="applis">
             <h3 class="block-title ml-3">Applications métiers</h3>
@@ -144,7 +146,7 @@
         </div>
         <div class=" w-25" style="min-width: 25rem;" id="alerts">
             <h3 class="ml-2" style="margin-bottom: 1rem;">Alertes et informations</h3>
-            <div class="overflow-auto w-100 bg-dark rounded m-2 p-3 text-justify" style="height: 40rem;">
+            <div class="overflow-auto w-100 bg-dark rounded m-2 p-3 text-justify" style="height: 75vh;">
                 <h3 class="mb-5 text-light">Le service Informatique vous informe</h3>
 
                 <?php 
@@ -157,8 +159,8 @@
         </div>
         <div class="ml-4" id="demandes">
             <h3 style="margin-bottom: 1rem;">Demandes</h3>
-            <a href="/Nouvel_Agent" target="_blank" class="m-1">
-                <div class="rounded w-100 ask-tile reveal-parent" style="width: 20rem; height: 7.7rem;">
+            <a href="http://10.1.0.37/Nouvel_Agent" target="_blank" class="m-1">
+                <div class="rounded w-100 ask-tile reveal-parent" style="width: 15rem; height: 7.7rem;">
                     <i class="fa fa-user mt-2 w-50 h-50" aria-hidden="true">
                     </i>
                     <p class="text-left m-1">Nouvel Agent</p>
@@ -168,9 +170,8 @@
                     </div>
                 </div>
             </a>
-            <a href="mailto:informatique@ville-saint-louis.fr?subject=Demande%20de%20d%C3%A9pannage&body=Description%20d%C3%A9taill%C3%A9e%20de%20votre%20demande%0D%0A%0D%0A%0D%0A%0D%0A----------------------------------------------------------------------------------------------------------%0ALieu%20:%20Mairie%0D%0ABureau%20:%20...%0D%0AUrgent%20:%20Non%0D%0ADate(s)%20d%E2%80%99intervention%20:%20(facultative)%0D%0A----------------------------------------------------------------------------------------------------------"
-                class="m-1">
-                <div class="rounded w-100 ask-tile reveal-parent" style="width: 20rem; height: 7.7rem;">
+            <a href="<?= route('support') ?>">
+                <div class="rounded w-100 ask-tile reveal-parent" style="width: 15rem; height: 7.7rem;">
                     <i class="fa fa-cogs mt-2 w-50 h-50" aria-hidden="true">
                     </i>
                     <p class="text-left m-1">Dépannage/Assistance</p>
@@ -182,7 +183,7 @@
                 </div>
             </a>
             <a href="http://pret.ville-saint-louis.fr/" target="_blank" class="m-1">
-                <div class="rounded w-100 ask-tile reveal-parent" style="width: 20rem; height: 7.7em;">
+                <div class="rounded w-100 ask-tile reveal-parent" style="width: 15rem; height: 7.7em;">
                     <i class="fa fa-calendar mt-2 w-50 h-50" aria-hidden="true">
                     </i>
                     <p class="text-left m-1">Agenda Prêt de matériel / Interventions</p>
@@ -196,17 +197,13 @@
         <div class="pl-4" id="aide">
             <h3 class="" style="margin-bottom: 1rem;">Aide et Documents</h3>
             <div class="d-flex flex-wrap justify-content-around text-center">
-                <a href="file://///hades/Partage_Ville" type="file" class="helpTile" id="share">
-                    <i class="fa fa-university" aria-hidden="true"></i>
-                    <p class="h6">Partage Ville</p>
+                <a href="<?= route('annuaire') ?>" type="link" class="helpTile" id="share">
+                    <i class="fa fa-address-book" aria-hidden="true"></i>
+                    <p class="h6">Annuaire</p>
                 </a>
                 <a href="http://alpha/docs/IT/" target="_blank" class="helpTile" id="docs">
                     <i class="fas fa-file-alt"></i>
                     <p class="h6">Documentation IT</p>
-                </a>
-                <a href="" class="helpTile" id="help">
-                    <i class="fa fa-cogs" aria-hidden="true"></i>
-                    <p class="h6">Aide & Maintenance</p>
                 </a>
                 <a href="softwarecenter:" target="_blank" class="helpTile" id="appCenter">
                     <i class="fa fa-download" aria-hidden="true"></i>

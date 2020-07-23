@@ -6,8 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=10">
     <title>INTRANET INFORMATIQUE | ALPHA | ANNUAIRE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--<meta http-equiv="refresh" content="300">-->
+
     <link rel="icon" href="<?= assets('images/logo_white.png')?>">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="<?= assets('css/bootstrap/bootstrap.min.css')?>" type="text/css" />
     <link rel="stylesheet" href="<?= assets('FontAwesome/css/all.min.css')?>" type="text/css" />
     <link rel="stylesheet" href="<?= assets('css/annuaire.css')?>" type="text/css" />
@@ -26,7 +28,7 @@
 <body class="p-3">
     <header class="header ml-4 m-2">
         <h1>
-            <a href="index.php" class="text-white">
+            <a href="<?= route('index') ?>" class="text-white">
                 <img src="<?= assets('images/logo_white.png') ?>" height="32" width="35" class="header-logo" alt=""
                     class="mb-5" />
                 <span class="d-none d-md-inline">INTRANET INFORMATIQUE | ALPHA | ANNUAIRE</span>
@@ -34,7 +36,7 @@
         </h1>
     </header>
     <div id="content" class="d-flex">
-        <section class="clearfix section isotope">
+        <div class="clearfix section isotope">
 
             <form action="<?= route('annuaire') ?>" method="get" class="flex-row mt-5 ml-4">
                 <div class="input-group">
@@ -49,92 +51,97 @@
                 </div>
             </form>
 
-            <table class="table table-responsive-md mt-3 ml-4 d-block"
-                style="width: 75vw; max-height: 75vh; overflow-y: auto;">
-                <thead class="position-sticky thead-dark" style="top: 0;">
-                    <!-- TODO: Optimiser les conditions ternaires, il y a sûrement moyen de faire plus court.    -->
+            <div class="table-wrapper-scroll overflow-auto mt-3 ml-4" style="max-height: 75vh; width: 75vw;">
+                <table class="table table-responsive-md w-100" style="overflow-y: auto;">
+                    <thead class="position-sticky thead-dark" style="top: 0;">
+                        <!-- TODO: Optimiser les conditions ternaires, il y a sûrement moyen de faire plus court.    -->
 
-                    <th> <a class="text-white"
-                            href="<?= isset($_GET['sort']) ? ($_GET['sort'] == 'name' ? '?sort=aname' . $searchUri : '?sort=name' . $searchUri) : '?sort=name' . $searchUri ?>">
-                            <i class="<?= !isset($_GET['sort']) ? 'fas fa-sort' : ($_GET['sort'] == 'name' ? 'fas fa-sort-down' : ($_GET['sort'] != 'aname' ? 'fas fa-sort' : 'fas fa-sort-up')) ?>"
-                                style="color: white"></i> NOM
-                        </a>
-                    </th>
-                    <th>
-                        <a class="text-white"
-                            href="<?= isset($_GET['sort']) ? ($_GET['sort'] == 'surname' ? '?sort=asurname' . $searchUri : '?sort=surname' . $searchUri) : '?sort=surname' . $searchUri ?>">
-                            <i class="<?= !isset($_GET['sort']) ? 'fas fa-sort' : ($_GET['sort'] == 'surname' ? 'fas fa-sort-down' : ($_GET['sort'] != 'asurname' ? 'fas fa-sort' : 'fas fa-sort-up')) ?>"
-                                style="color: white"></i> Prénom
-                        </a>
-                    </th>
-                    <th><a class="text-white"
-                            href="<?= isset($_GET['sort']) ? $_GET['sort'] == 'function' ? '?sort=afunction' . $searchUri : '?sort=function' . $searchUri : '?sort=function' . $searchUri ?>">
-                            <i class="<?= !isset($_GET['sort']) ? 'fas fa-sort' : ($_GET['sort'] == 'function' ? 'fas fa-sort-down' : ($_GET['sort'] != 'afunction' ? 'fas fa-sort' : 'fas fa-sort-up')) ?>"
-                                style="color: white"></i> Fonction
-                        </a>
-                    </th>
-                    <th>
-                        <a class="text-white"
-                            href="<?= isset($_GET['sort']) ? $_GET['sort'] == 'service' ? '?sort=aservice' . $searchUri : '?sort=service' . $searchUri : '?sort=service' . $searchUri ?>">
-                            <i class="<?= !isset($_GET['sort']) ? 'fas fa-sort' : ($_GET['sort'] == 'service' ? 'fas fa-sort-down' : ($_GET['sort'] != 'aservice' ? 'fas fa-sort' : 'fas fa-sort-up')) ?>"
-                                style="color: white"></i> Service
-                        </a>
-                    </th>
-                    <th>
-                        Chef de service
-                    </th>
-                    <th>
-                        Tél interne
-                    <th>
-                        Tél externe
-                    </th>
-                    <th>
-                        Détails
-                    </th>
-                </thead>
-                <tbody class="overflow-auto text-white">
-                    <?php foreach($agents as $agent){ ?>
-                    <tr class=" bg-<?= str_replace(' ', '', strtr( $agent->service, $tableau_accents ))?>">
-                        <td><?= $agent->nom ?></td>
-                        <td><?= $agent->prenom ?></td>
-                        <td><?= strlen($agent->fonction) >= 55 ? substr($agent->fonction, 0, 55) . ' ...' : $agent->fonction ?>
-                        </td>
-                        <td><?= $agent->service ?></td>
-                        <td><?= $agent->chef_de_service == true ?'<i class="fa fa-star" aria-hidden="true"></i>' : '' ?>
-                        </td>
-                        <td><?= $agent->tel_int ?></td>
-                        <td><?= $agent->tel_ext ?></td>
-                        <td><button type="button" data-toggle="modal" data-target="#Modal<?= $agent->id_u ?>"
-                                style="cursor: pointer;" class="btn"><i class="fa fa-plus text-white"
-                                    aria-hidden="true"></i></button></td>
-                    </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-        </section>
-
-        <div class="m-5 text-center">
-            <h3 class="text-white">Annexes</h3>
-
-            <div class="annexeTile text-decoration-none"
-                style="background: linear-gradient(to bottom right,#0A467E ,#126BB5 );">
-                <a type="file" href="<?= assets('download/annuaire-2020.pdf') ?>" download="Annuaire 2020"
-                    style="color: white !important;">
-                    <i class="fa fa-address-book" style="font-size: 3rem;"></i>
-                    <br>
-                    <p>Annuaire</p>
-                </a>
+                        <th> <a class="text-white"
+                                href="<?= isset($_GET['sort']) ? ($_GET['sort'] == 'name' ? '?sort=aname' . $searchUri : '?sort=name' . $searchUri) : '?sort=name' . $searchUri ?>">
+                                <i class="<?= !isset($_GET['sort']) ? 'fas fa-sort' : ($_GET['sort'] == 'name' ? 'fas fa-sort-down' : ($_GET['sort'] != 'aname' ? 'fas fa-sort' : 'fas fa-sort-up')) ?>"
+                                    style="color: white"></i> NOM
+                            </a>
+                        </th>
+                        <th>
+                            <a class="text-white"
+                                href="<?= isset($_GET['sort']) ? ($_GET['sort'] == 'surname' ? '?sort=asurname' . $searchUri : '?sort=surname' . $searchUri) : '?sort=surname' . $searchUri ?>">
+                                <i class="<?= !isset($_GET['sort']) ? 'fas fa-sort' : ($_GET['sort'] == 'surname' ? 'fas fa-sort-down' : ($_GET['sort'] != 'asurname' ? 'fas fa-sort' : 'fas fa-sort-up')) ?>"
+                                    style="color: white"></i> Prénom
+                            </a>
+                        </th>
+                        <th><a class="text-white"
+                                href="<?= isset($_GET['sort']) ? $_GET['sort'] == 'function' ? '?sort=afunction' . $searchUri : '?sort=function' . $searchUri : '?sort=function' . $searchUri ?>">
+                                <i class="<?= !isset($_GET['sort']) ? 'fas fa-sort' : ($_GET['sort'] == 'function' ? 'fas fa-sort-down' : ($_GET['sort'] != 'afunction' ? 'fas fa-sort' : 'fas fa-sort-up')) ?>"
+                                    style="color: white"></i> Fonction
+                            </a>
+                        </th>
+                        <th>
+                            <a class="text-white"
+                                href="<?= isset($_GET['sort']) ? $_GET['sort'] == 'service' ? '?sort=aservice' . $searchUri : '?sort=service' . $searchUri : '?sort=service' . $searchUri ?>">
+                                <i class="<?= !isset($_GET['sort']) ? 'fas fa-sort' : ($_GET['sort'] == 'service' ? 'fas fa-sort-down' : ($_GET['sort'] != 'aservice' ? 'fas fa-sort' : 'fas fa-sort-up')) ?>"
+                                    style="color: white"></i> Service
+                            </a>
+                        </th>
+                        <th>
+                            Chef de service
+                        </th>
+                        <th>
+                            Tél interne
+                        <th>
+                            Tél externe
+                        </th>
+                        <th>
+                            Détails
+                        </th>
+                    </thead>
+                    <tbody class="overflow-auto text-white">
+                        <?php foreach($agents as $agent){ ?>
+                        <tr class=" bg-<?= str_replace(' ', '', strtr( $agent->service, $tableau_accents ))?>">
+                            <td><?= $agent->nom ?></td>
+                            <td><?= $agent->prenom ?></td>
+                            <td><?= strlen($agent->fonction) >= 55 ? substr($agent->fonction, 0, 55) . ' ...' : $agent->fonction ?>
+                            </td>
+                            <td><?= $agent->service ?></td>
+                            <td><?= $agent->chef_de_service == true ?'<i class="fa fa-star" aria-hidden="true"></i>' : '' ?>
+                            </td>
+                            <td><?= $agent->tel_int ?></td>
+                            <td><?= $agent->tel_ext ?></td>
+                            <td><button type="button" data-toggle="modal" data-target="#Modal<?= $agent->id_u ?>"
+                                    style="cursor: pointer;" class="btn"><i class="fa fa-plus text-white"
+                                        aria-hidden="true"></i></button></td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
             </div>
+        </div>
 
-            <div class="annexeTile text-decoration-none"
-                style="background: linear-gradient(to bottom right,#029941 ,#13BD5A );">
-                <a type="file" href="<?= assets('download/trombinoscope-2020.pdf') ?>" target="_blank"
-                    style="color: white !important;">
-                    <i class="fa fa-users" style="font-size: 3rem;"></i>
-                    <br>
-                    <p>Trombinoscope</p>
-                </a>
-            </div>
+        <div class="m-5 d-flex flex-column" style="width: 25vw; margin-top: 10rem !important;">
+            <h3 class="text-white ml-5">Annexes</h3>
+
+            <a type="file" href="<?= assets('download/annuaire-2020.pdf') ?>" download="Annuaire 2020"
+                style="color: white !important;">
+                <div class="annexeTile text-decoration-none rounded"
+                    style="background: linear-gradient(to bottom right,#0A467E ,#126BB5 );">
+                    <p>
+                        <i class="fa fa-address-book" style="font-size: 3rem;"></i>
+                        <br>
+                        Annuaire
+                    </p>
+                </div>
+            </a>
+
+            <a type="file" href="<?= assets('download/trombinoscope-2020.pdf') ?>" download="Trombinoscope"
+                style="color: white !important;">
+                <div class="annexeTile text-decoration-none rounded"
+                    style="background: linear-gradient(to bottom right,#029941 ,#13BD5A );">
+                    <p class="w-100">
+                        <i class="fa fa-users w-100" style="font-size: 3rem;"></i>
+                        <br>
+                        Trombinoscope
+                    </p>
+                </div>
+            </a>
         </div>
     </div>
 
@@ -205,7 +212,6 @@
             </div>
         </div>
     </div>
-
     <?php } ?>
 
     <?php /* <?php echo $modalutilisateur; ?> */ ?>

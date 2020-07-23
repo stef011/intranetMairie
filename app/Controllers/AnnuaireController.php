@@ -2,9 +2,7 @@
 
 namespace App\Controllers;
 
-use Model\Administrateur;
 use Model\Agent;
-use Model\Information;
 
 class AnnuaireController
 {

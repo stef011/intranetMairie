@@ -1,0 +1,29 @@
+body {
+    background: transparent url('/ressources/assets/images/blurred-background.jpg') 0% 15% no-repeat padding-box;
+    background-attachment: fixed;
+    color: white;
+    margin: 1rem;
+}
+
+header {
+    color: white;
+}
+
+select,
+input,
+textarea {
+    background-color: rgba(255, 255, 255, 0.527) !important;
+}
+
+
+/* id */
+
+#solution {
+    background-color: rgba(0, 0, 0, 0.356);
+}
+
+#desc {
+    resize: none;
+    height: 20vh;
+    min-height: 20rem;
+}

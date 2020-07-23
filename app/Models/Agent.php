@@ -10,6 +10,8 @@ class Agent extends Model
 
     protected static $index = 'id_u';
 
+    protected static $table = 'agents';
+
     protected static $search_columns = 'prenom, nom, description, num_bureau, tel_int, tel_ext, adresse_postal, fonction, service, societe';
 
     protected static $columns = 'id_u, identifiant, prenom, nom, description, num_bureau, tel_int, tel_ext,

@@ -67,4 +67,19 @@ class Collection extends ArrayObject
         $this->uasort( $tri );
 
     }
+
+    public function filter($options = [])
+    {
+        $callback = function($item) use ($options){
+            foreach ($options as $key => $value) {
+                if($item->$key != $value){
+                    return false;
+                };
+            }
+            return true;
+        };
+        $this->exchangeArray(array_filter($this->getArrayCopy(), $callback));
+
+        return $this;
+    }
 }
