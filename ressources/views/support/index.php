@@ -117,6 +117,11 @@
     </div>
 
 
+    <div id="modals">
+
+    </div>
+
+
     <script type="text/javascript">
     $('#agree').change(function() {
         if ($('#agree').is(':checked')) {
@@ -142,7 +147,9 @@
                     dataType: "text",
                     success: function(data) {
                         if (data != '') {
-                            $('#list').html(data)
+                            var res = data.split('|')
+                            $('#list').html(res[0])
+                            $('#modals').html(res[1])
 
                         } else {
                             $('#list').html('Aucun résultat trouvé!')
