@@ -197,7 +197,7 @@ abstract class Model {
     /**
      * Save the Model into the database
      * 
-     * @return bool
+     * @return Model
      */
     public function save()
     {
@@ -227,8 +227,8 @@ abstract class Model {
         if (self::$conn->errorCode() != 00000) {
             throw new \Exception(self::$conn->errorInfo()[2]);
         }
-
-        return $result;
+        
+        return static::lastInserted();
     }
 
     /**
@@ -298,5 +298,26 @@ abstract class Model {
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
+    }
+
+    /**
+     * Get the last inserted row
+     * 
+     * @return Collection
+     */
+    public static function lastInserted()
+    {
+        
+        // $sql = 'SELECT LAST_INSERT_ID() as id';
+        // $stmt = self::$conn->prepare($sql);
+        // $stmt->execute();
+        // dd($stmt->fetch());
+
+        $id = static::$conn->lastInsertId();
+
+        // $id =  self::morph($stmt->fetch());
+
+
+        return static::find($id);
     }
 }

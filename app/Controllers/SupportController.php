@@ -5,6 +5,7 @@ namespace App\Controllers;
 use Model\Category;
 use Model\Ticket;
 use Model\Service;
+use Model\SubCategory;
 
 class SupportController {
 
@@ -54,7 +55,22 @@ class SupportController {
         $ticket->prenom = $prenom;
         $ticket->service_id = $service;
 
-        $ticket->save();
+        $ticket = $ticket->save();
+
+
+        // mail('zundel.stephane@sfr.fr', 'Support Informatique : '. $category . '-' . $subCategory , $desc , 'From : test.test@saint-louis.fr');
+
+        $serviceName = Service::find($service)->nom_service;
+
+        $subCategory = SubCategory::find($ticket->sous_category_id);
+        $category = Category::find($subCategory->category_id);
+
+        $recipient = 'informatique@ville-saint-louis.fr';
+        $mailSubject = 'Nouveau ticket Support informatique dans [' . $category->nom . '.' . $subCategory->nom .']';
+        $bodyText = "$subject \r\n $subCategory->nom \r\n $desc \r\n $nom $prenom - Servie $serviceName \r\n Envoyé le $ticket->date";
+        $bodyHtml = "<h1>$subject</h1><h2> $subCategory->nom </h2> $desc <br><br> $nom $prenom - Service $serviceName <br><br> Envoyé le $ticket->date";
+
+        sendMail($recipient, $mailSubject, $bodyText, $bodyHtml);
 
         header('Location:'.route('index').'?success=1');
     }
