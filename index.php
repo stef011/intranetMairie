@@ -1,6 +1,6 @@
 <?php
-session_start();
 require('./vendor/autoload.php');
+session_start();
 
 use App\Router\Router;
 
@@ -25,6 +25,7 @@ $router->post('/api/tutorials', 'ApiController@tutos', 'api.tutorials');
 $router->post('/api/sub-cats', 'ApiController@subCategories', 'api.subCats');
 
 $router->get('/tutoriel/:id', 'TutorialController@show', 'tutoriel');
+
 
 
 $router->run();
