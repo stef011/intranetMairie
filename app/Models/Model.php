@@ -77,6 +77,8 @@ abstract class Model {
      */
     public static function find($id)
     {
+        $res = array();
+
         if (!is_array($id)) {
             $id = array($id);
         }
@@ -87,8 +89,16 @@ abstract class Model {
         $req = self::$conn->prepare($sql);
         $req->bindParam(1, $ids);
         $req->execute();
-        $res = self::morph($req->fetch());
-        return $res;
+        $preRes = $req->fetchAll();
+        foreach ($preRes as $pre) {
+            $res[] = self::morph($pre);
+        }
+        if (count($res) > 1) {
+            return $res;
+        }elseif (count($res) == 1) {
+            return $res[0];
+        }
+        return null;
     }
 
     /**
