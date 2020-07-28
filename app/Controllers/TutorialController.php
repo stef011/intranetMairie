@@ -9,7 +9,7 @@ class TutorialController
 {
     public function index()
     {
-        $tutorials = Tutorial::all();
+        $tutorials = Tutorial::active();
         return view('tutorial.index', compact('tutorials'));
     }
 

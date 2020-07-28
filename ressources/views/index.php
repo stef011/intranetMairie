@@ -201,7 +201,7 @@
                     <i class="fa fa-address-book" aria-hidden="true"></i>
                     <p class="h6">Annuaire</p>
                 </a>
-                <a href="http://alpha/docs/IT/" target="_blank" class="helpTile" id="docs">
+                <a href="<?= route('tutoriels.index') ?>" class="helpTile" id="docs">
                     <i class="fas fa-file-alt"></i>
                     <p class="h6">Documentation IT</p>
                 </a>

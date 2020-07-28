@@ -23,7 +23,7 @@ function view($view, $data = null)
 function assets($path)
 {
     trim($path, '/');
-    return 'ressources/assets/' . $path;
+    return '/ressources/assets/' . $path;
 }
 
 function route($name, $params=[])

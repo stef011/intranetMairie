@@ -16,12 +16,15 @@
 
 </head>
 
-<body class="m-md-5 m-3 bg-dark text-light">
+<body class="bg-dark text-light">
 
-    <h1 class="ml-4 mb-4">Liste de tous les Tutoriels | Site Alpha</h1>
+    <div class="bg-white text-dark p-4">
+        <h1>Liste des Tutoriels | <a href="<?= route('index') ?>" class="text-dark text-decoration-none">Intranet
+                Alpha</a></h1>
+    </div>
 
 
-    <div class="m-3">
+    <div class="m-3 m-md-5 ">
         <div class="row align-items-stretch">
             <?php foreach ($tutorials as $tutoriel) { ?>
             <div class="col-sm-6 mb-3">
@@ -34,7 +37,7 @@
                         </p>
                     </div>
                     <div class="card-footer">
-                        <a href="<?= route('tutoriel.show', ['id' => $tutoriel->ID_TUTORIEL]) ?>"
+                        <a href="<?= route('tutoriels.show', ['id' => $tutoriel->ID_TUTORIEL]) ?>"
                             class="btn btn-primary">Aller au tutoriel</a>
                     </div>
                 </div>
