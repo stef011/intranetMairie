@@ -16,7 +16,7 @@ class ApiController{
             $response .= '<li><a type="button" data-toggle="modal"
                     data-target="#Modal'.$tutoriel->ID_TUTORIEL.'">'.$tutoriel->NOM_TUTORIEL.'</a></li>';
 
-            $modals .= <<<END
+            $modals .= <<<EAF
                 <div class="modal fade" id="Modal$tutoriel->ID_TUTORIEL" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
                 <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
@@ -36,16 +36,15 @@ class ApiController{
                     </div>
                 </div>
                 </div>
-            END;
-        }
-
+EAF;
+}
         echo $response . "|" . $modals;
 
     }
 
     public function subCategories()
     {
-        $sousCats = SubCategory::filter(['category_id' => ($_POST['cat'] ?? '')]);
+        $sousCats = SubCategory::filter(['category_id' => (($_POST['cat']) ?? '""')]);
         $response = '';
 
         foreach ($sousCats as $sousCat) {
@@ -55,5 +54,3 @@ class ApiController{
         echo $response;
     }
 }
-
-?>
