@@ -92,10 +92,10 @@ function sendMail($to, $subject, $bodyText, $bodyHtml = null)
     }
     catch(PHPMailerException $e){
         echo "Une erreur est survenue. {$e->errorMessage()}", PHP_EOL;
-        return false;
+        exit();
     }
     catch(Exception $e){
         echo "Email non envoyé. {$mail->ErrorInfo}", PHP_EOL;
-        return false;
+        exit();
     }
 }
