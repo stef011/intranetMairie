@@ -66,6 +66,8 @@ class Collection extends ArrayObject
 
         $this->uasort( $tri );
 
+        return $this;
+
     }
 
     public function filter($options = [])
@@ -81,5 +83,21 @@ class Collection extends ArrayObject
         $this->exchangeArray(array_filter($this->getArrayCopy(), $callback));
 
         return $this;
+    }
+    
+    public function filter_nondestructive($options = [])
+    {
+        $callback = function($item) use ($options){
+            foreach ($options as $key => $value) {
+                if($item->$key != $value){
+                    return false;
+                };
+            }
+            return true;
+        };
+        $filtered = clone $this;
+        $filtered->exchangeArray(array_filter($this->getArrayCopy(), $callback));
+
+        return $filtered;
     }
 }

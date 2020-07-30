@@ -66,12 +66,12 @@ function sendMail($to, $subject, $bodyText, $bodyHtml = null)
     try {
         $mail->isSMTP();
         $mail->setFrom($_ENV['MAIL_FROM_ADDRESS'], $_ENV['MAIL_FROM_NAME']);
-        $mail->Username     = $_ENV['MAIL_USERNAME'];
-        $mail->Password     = $_ENV['MAIL_PASSWORD'];
         $mail->Host         = $_ENV['MAIL_HOST'];
         $mail->Port         = $_ENV['MAIL_PORT'];
         $mail->SMTPAuth     = true;
         $mail->SMTPSecure   = 'tls';
+        $mail->Username     = $_ENV['MAIL_USERNAME'];
+        $mail->Password     = $_ENV['MAIL_PASSWORD'];
         $mail->CharSet      = 'UTF-8';
         
 
