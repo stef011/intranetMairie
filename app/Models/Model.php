@@ -217,7 +217,11 @@ abstract class Model {
         $propsToImplode = array();
         foreach ($object->getProperties(ReflectionProperty::IS_PUBLIC) as $property) {
             $propertyName = $property->getName();
-            $propsToImplode[] = '`'.$propertyName.'` = "'.$this->{$propertyName}.'"';
+            if ($this->{$propertyName} != null) {
+                $propsToImplode[] = '`'.$propertyName.'` = "'.$this->{$propertyName}.'"';
+            }else{
+                $propsToImplode[] = '`'.$propertyName.'` = null';
+            }
         }
 
         $setClause = implode(',',$propsToImplode); // glue all key value pairs together
