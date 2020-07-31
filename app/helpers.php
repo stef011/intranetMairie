@@ -55,7 +55,7 @@ if (!function_exists('dd')) {
  *      Body in HTMl, facultative
  * @return bool 
  */
-function sendMail($to, $subject, $bodyText, $bodyHtml = null)
+function sendMail($to, $subject, $bodyText, $bodyHtml = null, $replyTo = null)
 {
     $mail = new PHPMailer(true);
 
@@ -77,6 +77,12 @@ function sendMail($to, $subject, $bodyText, $bodyHtml = null)
 
         foreach ($to as $recipient) {
             $mail->addAddress($recipient);
+        }
+
+        if (null!= $replyTo) {
+            foreach($replyTo as $repTo){
+                $mail->addReplyTo($repTo);
+            }
         }
 
         if (null != $bodyHtml) {

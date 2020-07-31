@@ -72,7 +72,7 @@ class SupportController {
         $bodyText = "$subject \r\n $subCategory->nom \r\n $desc \r\n $nom $prenom - Servie $serviceName \r\n Envoyé le $ticket->date";
         $bodyHtml = "<h1>$subCategory->nom</h1><h2> $subject </h2> $desc <br><br> $nom $prenom - Service $serviceName <br><br> Envoyé le $ticket->date";
 
-        sendMail($recipient, $mailSubject, $bodyText, $bodyHtml);
+        sendMail($recipient, $mailSubject, $bodyText, $bodyHtml, $email);
 
         header('Location:'.route('index').'?success=1');
     }
