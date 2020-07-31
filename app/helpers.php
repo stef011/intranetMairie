@@ -65,7 +65,6 @@ function sendMail($to, $subject, $bodyText, $bodyHtml = null, $replyTo = null)
 
     try {
         $mail->isSMTP();
-        $mail->setFrom($_ENV['MAIL_FROM_ADDRESS'], $_ENV['MAIL_FROM_NAME']);
         $mail->Host         = $_ENV['MAIL_HOST'];
         $mail->Port         = $_ENV['MAIL_PORT'];
         $mail->SMTPAuth     = true;
@@ -74,16 +73,17 @@ function sendMail($to, $subject, $bodyText, $bodyHtml = null, $replyTo = null)
         $mail->Password     = $_ENV['MAIL_PASSWORD'];
         $mail->CharSet      = 'UTF-8';
         
-
+        
         foreach ($to as $recipient) {
             $mail->addAddress($recipient);
         }
-
+        
         if (null!= $replyTo) {
             foreach($replyTo as $repTo){
                 $mail->addReplyTo($repTo);
             }
         }
+        $mail->setFrom($_ENV['MAIL_FROM_ADDRESS'], $_ENV['MAIL_FROM_NAME']);
 
         if (null != $bodyHtml) {
             $mail->isHTML(true);
