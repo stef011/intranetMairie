@@ -37,8 +37,9 @@
                     <?= $ticket->description ?>
                 </div>
                 <div class="card-footer d-flex justify-content-between">
-                    <p><?= $ticket->nom . ' ' . $ticket->prenom . ' - ' . $ticket->service()->nom_service ?>
-                    </p>
+                    <a
+                        href="mailto:<?= $ticket->prenom . '%20' . $ticket->nom ?><<?= $ticket->email ?>>?subject=Re:%20<?= str_replace(' ', '%20', $ticket->subject) ?>"><?= $ticket->nom . ' ' . $ticket->prenom . ' - ' . $ticket->service()->nom_service ?>
+                    </a>
                     <div>
                         Marquer comme:
                         <a class="btn btn-danger"

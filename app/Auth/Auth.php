@@ -31,7 +31,7 @@ class Auth
         // var_dump($login .' '. $password);
 
         $user = Administrateur::filter(['LOGIN_ADMIN' => $login, 'PWD_CRYPT'=> $password]);
-        if (empty($user)) {
+        if (!isset($user)) {
             header('Location: '. $_SERVER['HTTP_REFERER']);
             exit();
             return false;

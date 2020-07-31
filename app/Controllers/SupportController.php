@@ -42,6 +42,7 @@ class SupportController {
             $subCategory = test_input($_POST['sub-category']);
             $subject  = test_input($_POST['subject']);
             $desc = test_input($_POST['desc']);
+            $email = test_input($_POST['email']);
 
         } else{
             return $this->index();
@@ -54,6 +55,7 @@ class SupportController {
         $ticket->nom = $nom;
         $ticket->prenom = $prenom;
         $ticket->service_id = $service;
+        $ticket->email = $email;
 
         $ticket = $ticket->save();
 

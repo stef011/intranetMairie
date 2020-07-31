@@ -30,6 +30,7 @@
             </div>
             <p class="mr-3"><span class="text-muted h5">Bienvenue,</span> <br> <span
                     class="h5"><?= $admin->NOM_ADMIN ?></span></p>
+
         </div>
         <div class="line m-3"></div>
         <nav class="nav flex-column m-3 ml-4">
@@ -57,6 +58,8 @@
             <?php } else{ echo '<i class="fa fa-chevron-right" aria-hidden="true"></i></div>';} ?>
             <?php } ?>
         </nav>
+        <a class="btn center position-absolute btn-danger ml-2" style="bottom: 2rem;"
+            href="<?= route('admin.logout') ?>">Déconnexion</a>
     </div>
 
     <?= $content ?? '' ?>

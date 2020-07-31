@@ -41,14 +41,20 @@
             <?php } ?>
             <h3 class="form-row mb-2">Vos Coordonnées: </h3>
             <div class="form-row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <input type="text" name="nom" placeholder="Nom" value="<?= '' ?>" class="form-control" required>
                 </div>
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-6">
                     <input type="text" name="prenom" placeholder="Prénom" value="<?= '' ?>" class="form-control"
                         required>
                 </div>
-                <div class="form-group col-md-4">
+            </div>
+            <div class="form-row mb-2">
+                <div class="form-group col-md-6">
+                    <input type="email" name="email" id="email" placeholder="Adresse E-Mail" class="form-control"
+                        required>
+                </div>
+                <div class="form-group col-md-6">
                     <select name="service" class="form-control" required>
                         <option value="null" disabled selected hidden>Selectionnez votre Service</option>
                         <?php foreach ($services as $service) {?>
