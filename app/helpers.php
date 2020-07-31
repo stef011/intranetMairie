@@ -55,15 +55,12 @@ if (!function_exists('dd')) {
  *      Body in HTMl, facultative
  * @return bool 
  */
-function sendMail($to, $subject, $bodyText, $bodyHtml = null, $replyTo = null)
+function sendMail($to, $subject, $bodyText, $bodyHtml = null)
 {
     $mail = new PHPMailer(true);
 
     if (!is_array($to)) {
         $to = array($to);
-    }
-    if (!is_array($replyTo)) {
-        $replyTo = array($replyTo);
     }
 
     try {
@@ -81,10 +78,7 @@ function sendMail($to, $subject, $bodyText, $bodyHtml = null, $replyTo = null)
             $mail->addAddress($recipient);
         }
         
-            foreach($replyTo as $repTo){
-                $mail->addReplyTo($repTo);
-            }
-        $mail->setFrom($replyTo, $_ENV['MAIL_FROM_NAME']);
+        $mail->setFrom($_ENV['MAIL_FROM_ADDRESS'], $_ENV['MAIL_FROM_NAME']);
 
         if (null != $bodyHtml) {
             $mail->isHTML(true);
