@@ -77,6 +77,8 @@ abstract class Model {
      */
     public static function find($id)
     {
+        $res = array();
+
         if (!is_array($id)) {
             $id = array($id);
         }
@@ -87,8 +89,16 @@ abstract class Model {
         $req = self::$conn->prepare($sql);
         $req->bindParam(1, $ids);
         $req->execute();
-        $res = self::morph($req->fetch());
-        return $res;
+        $preRes = $req->fetchAll();
+        foreach ($preRes as $pre) {
+            $res[] = self::morph($pre);
+        }
+        if (count($res) > 1) {
+            return $res;
+        }elseif (count($res) == 1) {
+            return $res[0];
+        }
+        return null;
     }
 
     /**
@@ -197,7 +207,7 @@ abstract class Model {
     /**
      * Save the Model into the database
      * 
-     * @return bool
+     * @return Model
      */
     public function save()
     {
@@ -207,7 +217,11 @@ abstract class Model {
         $propsToImplode = array();
         foreach ($object->getProperties(ReflectionProperty::IS_PUBLIC) as $property) {
             $propertyName = $property->getName();
-            $propsToImplode[] = '`'.$propertyName.'` = "'.$this->{$propertyName}.'"';
+            if ($this->{$propertyName} != null) {
+                $propsToImplode[] = '`'.$propertyName.'` = "'.$this->{$propertyName}.'"';
+            }else{
+                $propsToImplode[] = '`'.$propertyName.'` = null';
+            }
         }
 
         $setClause = implode(',',$propsToImplode); // glue all key value pairs together
@@ -227,8 +241,8 @@ abstract class Model {
         if (self::$conn->errorCode() != 00000) {
             throw new \Exception(self::$conn->errorInfo()[2]);
         }
-
-        return $result;
+        
+        return static::lastInserted();
     }
 
     /**
@@ -298,5 +312,26 @@ abstract class Model {
         } catch (PDOException $e) {
             echo $e->getMessage();
         }
+    }
+
+    /**
+     * Get the last inserted row
+     * 
+     * @return Collection
+     */
+    public static function lastInserted()
+    {
+        
+        // $sql = 'SELECT LAST_INSERT_ID() as id';
+        // $stmt = self::$conn->prepare($sql);
+        // $stmt->execute();
+        // dd($stmt->fetch());
+
+        $id = static::$conn->lastInsertId();
+
+        // $id =  self::morph($stmt->fetch());
+
+
+        return static::find($id);
     }
 }

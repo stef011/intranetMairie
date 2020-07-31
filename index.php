@@ -1,6 +1,6 @@
 <?php
-session_start();
 require('./vendor/autoload.php');
+session_start();
 
 use App\Router\Router;
 
@@ -12,9 +12,13 @@ $router = new Router($_GET['url']);
 
 $router->get('/', 'IndexController@show', 'index');
 
-$router->get('/admin', 'AdminController@index', 'admin.index');
 $router->post('/admin', 'AdminController@login', 'admin.login');
 $router->get('/admin/logout', 'AdminController@logout', 'admin.logout');
+$router->get('/admin', 'AdminController@index', 'admin.index');
+$router->get('/admin/tickets', 'AdminController@tickets', 'admin.tickets');
+
+$router->get('/ticket/setState/:id/:state', 'TicketController@setState', 'ticket.setState');
+
 
 $router->get('/annuaire', 'AnnuaireController@index', 'annuaire');
 
@@ -24,7 +28,9 @@ $router->post('/support', 'SupportController@post', 'support');
 $router->post('/api/tutorials', 'ApiController@tutos', 'api.tutorials');
 $router->post('/api/sub-cats', 'ApiController@subCategories', 'api.subCats');
 
-$router->get('/tutoriel/:id', 'TutorialController@show', 'tutoriel');
+$router->get('/tutoriels', 'TutorialController@index', 'tutoriels.index');
+$router->get('/tutoriels/:id', 'TutorialController@show', 'tutoriels.show');
+
 
 
 $router->run();

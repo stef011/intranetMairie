@@ -1,6 +1,6 @@
 <?php 
 
-namespace App;
+namespace App\Auth;
 
 use Model\Administrateur;
 
@@ -8,7 +8,11 @@ class Auth
 {
     // public $login;
 
-
+    /**
+     * Returns the current user
+     * 
+     * @return Administrateur|null
+     */
     static function user()
     {
         if(isset($_SESSION['user']))
@@ -32,7 +36,7 @@ class Auth
             exit();
             return false;
         } else{
-            $_SESSION['user'] = $user;
+            $_SESSION['user'] = $user[0];
             return true;
         }
         // die(var_dump($admin));

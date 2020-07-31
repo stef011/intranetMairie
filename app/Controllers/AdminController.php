@@ -2,8 +2,11 @@
 
 namespace App\Controllers;
 
-use App\Auth;
+use App\Auth\Auth;
 use App\Router\Router;
+use Model\Category;
+use Model\SubCategory;
+use Model\Ticket;
 
 class AdminController 
 {
@@ -13,7 +16,11 @@ class AdminController
         if (Auth::user() == null) {
             return view('admin.login');
         }
-        return view('admin.index');
+        $admin = Auth::user();
+        if (in_array($admin->LOGIN_ADMIN, ['admin', 'informatique'])) {
+            header('Location: '. route('admin.tickets'));
+        }
+        return view('admin.index', compact('admin'));
     }
 
     public function login()
@@ -29,5 +36,19 @@ class AdminController
     {
         Auth::logout();
         header('Location: '. route('index'));
+    }
+
+    public function tickets()
+    {
+        if (Auth::user() == null) {
+            return view('admin.login');
+        }
+        $admin = Auth::user();
+        $tickets = Ticket::all()->orderBy(['state_id'=>'asc']);
+        $cats = Category::all();
+        $subCats = SubCategory::all();
+        $showSub = isset($_GET['subCat']) ? SubCategory::find($_GET['subCat']) : '';
+
+        return view('admin.tickets', compact('admin', 'tickets', 'cats', 'subCats', 'showSub'));
     }
 }

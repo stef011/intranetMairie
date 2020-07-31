@@ -23,8 +23,8 @@
         <h1 class="mb-5 mt-2 ml-5 align-self-start"> <img src="<?= assets('Images/logo_white.png') ?>" alt="Logo"
                 style="width: 2.5rem; position: relative; bottom: 0.35rem;">
             Demande de Support |
-            Site
-            Alpha </h1>
+            <a href="<?= route('index') ?>" class="text-white text-decoration-none">Intranet
+                Alpha</a> </h1>
 
         <div class="float-right mr-5">
             <h2 class="h4">Vos informations</h2>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="col-md-6 mt-md-0 mt-1">
                     <select name="sub-category" id="sub-cat" class="form-control" required>
-                        <option value="null" disabled selected hidden>Choisissez d'abord une catégorie</option>
+                        <option value="null" disabled selected>Choisissez d'abord une catégorie</option>
                         <!-- TODO : Ajouter le foreach php et créer la table AJAX :(  -->
                     </select>
                     <div class="invalid-feedback">

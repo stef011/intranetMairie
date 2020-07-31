@@ -1,0 +1,19 @@
+/* Classes */
+
+.bg-dark {
+    background-color: #474852 !important;
+}
+
+.bg-secondary {
+    background-color: #555665 !important;
+}
+
+.line {
+    /* Draw a line */
+    background-color: white;
+    height: 1px;
+}
+
+span.text-muted {
+    color: #BAB8B8 !important;
+}
