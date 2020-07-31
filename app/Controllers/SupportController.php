@@ -71,9 +71,8 @@ class SupportController {
         $mailSubject = 'Nouveau ticket Support informatique dans [' . $category->nom . '.' . $subCategory->nom .']';
         $bodyText = "$subject \r\n $subCategory->nom \r\n $desc \r\n $nom $prenom - Servie $serviceName \r\n Envoyé le $ticket->date";
         $bodyHtml = "<h1>$subCategory->nom</h1>
-        <h2> $subject </h2> $desc <br><br><a
-            href='mailto:<?= $ticket->prenom . '%20' . $ticket->nom ?><<?= $ticket->email ?>>
-    ?subject=Re:%20<?= str_replace(' ', '%20', $ticket->subject) ?>'>
+        <h2> $subject </h2> $desc <br><br><a href='mailto:$ticket->prenom%20$ticket->nom<$ticket->email>
+    ?subject=Re:%20" . str_replace(' ', ' %20', $ticket->subject) . "'>
     $nom $prenom </a> - Service $serviceName <br><br> Envoyé le $ticket->date";
 
     sendMail($recipient, $mailSubject, $bodyText, $bodyHtml);
